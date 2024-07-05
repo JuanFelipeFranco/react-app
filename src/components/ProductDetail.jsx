@@ -10,7 +10,7 @@ export const ProductDetail = ({product={}})=>{
     )   
 }
 
-
+//agregamos proptypes.
 ProductDetail.propTypes = {
     products: PropTypes.array.isRequired
 }

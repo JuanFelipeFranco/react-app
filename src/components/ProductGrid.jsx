@@ -21,6 +21,7 @@ export const ProductGrid = ( {products = []} ) =>{
     )
 }
 
+//agregamos proptypes.
 ProductGrid.propTypes = {
     products: PropTypes.array.isRequired
 }

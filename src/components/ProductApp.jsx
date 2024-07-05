@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { listProduct } from "../services/ProductService";
 import { ProductGrid } from "./ProductGrid";
+import {PropTypes} from 'prop-types'
 
 
-export const ProductApp = () =>{
+export const ProductApp = ({title}) =>{
 
     const[products, setProducts]=useState([]);
 
@@ -14,8 +15,12 @@ export const ProductApp = () =>{
     
     return(
         <> 
-         <h1>Productos!</h1>
+         <h1>{ title }</h1>
          <ProductGrid products={products}/>
         </>
     )
+}
+
+ProductApp.propTypes = {
+    title:PropTypes.string.isRequired
 }
