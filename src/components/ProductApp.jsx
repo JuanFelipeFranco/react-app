@@ -19,6 +19,11 @@ export const ProductApp = ({title}) =>{
         setProducts([...products, {...product}]);
     }
 
+    const handlerRemoveProduct = (name)=>{
+        console.log(name)
+        setProducts(products.filter(product => product.name != name));
+    }
+
     return(
         <> 
          <h1>{ title }</h1>
@@ -26,7 +31,7 @@ export const ProductApp = ({title}) =>{
             <ProductForm handlerAdd={handlerAddProduct}/>
          </div>
          <div>
-            <ProductGrid products={products}/>
+            <ProductGrid products={products} handlerRemove={handlerRemoveProduct}/>
          </div>
         </>
     )

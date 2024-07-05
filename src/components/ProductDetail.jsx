@@ -1,16 +1,22 @@
 import {PropTypes} from 'prop-types'
-// eslint-disable-next-line react/prop-types
-export const ProductDetail = ({product={}})=>{
+
+export const ProductDetail = ({handlerRemove, product={}})=>{
     return(
         <tr>
             <td>{product.name}</td>
             <td>{product.description}</td>
             <td>{product.price}</td>
+            <td>
+                <button onClick={()=>handlerRemove(product.name)}>
+                    Remove
+                </button>
+            </td>
         </tr>
     )   
 }
 
 //agregamos proptypes.
 ProductDetail.propTypes = {
-    products: PropTypes.array.isRequired
+    product: PropTypes.array.isRequired,
+    handlerRemove: PropTypes.func.isRequired
 }
