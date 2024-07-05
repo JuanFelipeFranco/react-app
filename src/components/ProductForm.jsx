@@ -6,13 +6,25 @@ const initialDataForm={
     price:''
 }
 
-export const ProductForm = () => {
+// eslint-disable-next-line react/prop-types
+export const ProductForm = ({handlerAdd}) => {
 
     const [form, setForm] = useState(initialDataForm);
 
     const{name, description, price} = form; //desestructuramos
     return (
-        <form>
+        <form onSubmit={(event)=>{
+            event.preventDefault();
+            if(!name || !description || !price){
+                alert("Debe completar los datos del formulario")
+            }
+            
+            //enviamos la funcion handlerAdd
+            handlerAdd(form);
+
+            //LIMPIAMOS LOS DATOS DEL FORMULARIO
+            setForm(initialDataForm)
+        }}>
             <div>
             <input placeholder="Name"
             style={{marginBottom:'6px'}}
@@ -51,3 +63,4 @@ export const ProductForm = () => {
         </form>
     )
 }
+
