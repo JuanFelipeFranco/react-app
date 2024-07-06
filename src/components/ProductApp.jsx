@@ -9,6 +9,13 @@ export const ProductApp = ({title}) =>{
 
     const[products, setProducts]=useState([]);
 
+    const[productSelected, setProductSelected] = useState({
+        id:0,
+        name:'',
+        description:'',
+        price:''
+    })
+
     useEffect(()=>{
         const result = listProduct();
         setProducts(result);
@@ -16,22 +23,39 @@ export const ProductApp = ({title}) =>{
     
     const handlerAddProduct = (product)=>{
         console.log(product)
-        setProducts([...products, {...product}]);
+        
+        if(product.id > 0){
+            //si esta incluido es que lo vamos a actualizar
+            setProducts(products.map(prod => {
+                if(prod.id == product.id){
+                 return {...product}
+                }
+                return prod; //prod es producto nuevo; product un producto que ya existe.
+             }))
+        }else{
+            //si no esta incluido lo vamos a agregar
+            setProducts([...products, {...product, id:new Date().getTime()}]);
+        }
+        
     }
 
-    const handlerRemoveProduct = (name)=>{
-        console.log(name)
-        setProducts(products.filter(product => product.name != name));
+    const handlerRemoveProduct = (id)=>{
+        console.log(id)
+        setProducts(products.filter(product => product.id != id));
+    }
+
+    const handlerProductSelected = (product)=>{
+        setProductSelected({...product});
     }
 
     return(
         <> 
          <h1>{ title }</h1>
          <div>
-            <ProductForm handlerAdd={handlerAddProduct}/>
+            <ProductForm handlerAdd={handlerAddProduct} productSelected={productSelected}/>
          </div>
          <div>
-            <ProductGrid products={products} handlerRemove={handlerRemoveProduct}/>
+            <ProductGrid products={products} handlerRemove={handlerRemoveProduct} handlerProductSelected={handlerProductSelected}/>
          </div>
         </>
     )
